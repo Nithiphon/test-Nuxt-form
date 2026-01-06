@@ -66,12 +66,12 @@
 
         <!-- สถานที่ -->
         <div class="form-group">
-          <label>สถานที่ <span class="required">*</span></label>
+          <label>สถานที่(เลือกสนามในจังหวัดที่ท่านต้องการแข่งขัน) <span class="required">*</span></label>
           <select v-model="formData.location" required>
             <option value="" disabled>เลือกสถานที่</option>
-            <option value="อุบลราชธานี">อุบลราชธานี</option>
+            <option value="อุบลราชธานี">เซ็นทรัลอุบลราชธานี</option>
             <option value="อำนาจเจริญ">อำนาจเจริญ</option>
-            <option value="นครราชสีมา">นครราชสีมา</option>
+            <option value="นครราชสีมา">เซ็นทรัลนครราชสีมา</option>
           </select>
         </div>
 
@@ -112,7 +112,7 @@
             <h3>{{ person.fullName }} ({{ person.nickname }})</h3>
             <div class="details">
               <span class="badge">อายุ {{ person.age }} ปี</span>
-              <span class="badge">{{ person.ageGroup }}</span>
+              <span class="badge">(แข่งในรุ่น) {{ person.ageGroup }}</span>
               <span class="badge location">📍 {{ person.location }}</span>
             </div>
             <small>ลงทะเบียนเมื่อ: {{ formatDate(person.timestamp) }}</small>
