@@ -89,44 +89,7 @@
         ❌ {{ errorMessage }}
       </div>
     </div>
-
-    <!-- แสดงรายการผู้สมัคร -->
-    <div class="registrants-card">
-      <h2>👥 รายชื่อผู้สมัครทั้งหมด ({{ registrants.length }})</h2>
-      
-      <div v-if="loading" class="loading">
-        กำลังโหลดข้อมูล...
-      </div>
-
-      <div v-else-if="registrants.length === 0" class="empty">
-        ยังไม่มีผู้สมัคร
-      </div>
-
-      <div v-else class="registrant-list">
-        <div 
-          v-for="person in registrants" 
-          :key="person.id" 
-          class="registrant-item"
-        >
-          <div class="registrant-info">
-            <h3>{{ person.fullName }} ({{ person.nickname }})</h3>
-            <div class="details">
-              <span class="badge">อายุ {{ person.age }} ปี</span>
-              <span class="badge">(แข่งในรุ่น) {{ person.ageGroup }}</span>
-              <span class="badge location">📍 {{ person.location }}</span>
-            </div>
-            <small>ลงทะเบียนเมื่อ: {{ formatDate(person.timestamp) }}</small>
-          </div>
-          <button 
-            @click="deleteRegistrant(person.id)" 
-            class="delete-btn"
-          >
-            ลบ
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 </template>
 
 <script setup>
