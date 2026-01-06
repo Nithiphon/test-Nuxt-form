@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="form-card">
-      <h1>📝 ฟอร์มลงทะเบียนแข่งขัน</h1>
+      <h1>📝 ฟอร์มลงทะเบียนแข่งขัน (ทดสอบระบบ)</h1>
       
       <form @submit.prevent="submitForm">
         <!-- ชื่อ -->
