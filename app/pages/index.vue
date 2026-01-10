@@ -1,98 +1,208 @@
 <template>
-  <div class="container">
-    <div class="form-card">
-      <h1>📝 ฟอร์มลงทะเบียนแข่งขัน (ทดสอบระบบ)</h1>
-      
-      <form @submit.prevent="submitForm">
-        <!-- ชื่อ -->
-        <div class="form-group">
-          <label>ชื่อ - นามสกุล <span class="required">*</span></label>
-          <input 
-            v-model="formData.fullName" 
-            type="text" 
-            placeholder="กรอกชื่อ-นามสกุล"
-            required
-          >
-        </div>
+  <!-- พื้นหลังสวยๆ -->
+  <div class="min-vh-auto bg-light py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-8">
+          
+          <!-- การ์ดฟอร์ม -->
+          <div class="card shadow-lg border-0">
+            <div class="card-header bg-dark text-white text-center py-4">
+              <h1 class="mb-0 fs-3">📝 ฟอร์มลงทะเบียนแข่งขัน</h1>
+              <p class="mb-0 mt-2 opacity-75 small">(ทดสอบระบบ)</p>
+            </div>
+            
+            <div class="card-body p-4">
+              <form @submit.prevent="submitForm">
+                
+                <!-- ชื่อ - นามสกุล -->
+                <div class="mb-3 fs-5 p-2">
+                  <label class="form-label fw-semibold">
+                    ชื่อ - นามสกุล 
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input 
+                    v-model="formData.fullName" 
+                    type="text" 
+                    class="form-control form-control-lg fs-6"
+                    placeholder="กรอกชื่อ-นามสกุล"
+                    required
+                  >
+                </div>
 
-        <!-- ชื่อเล่น -->
-        <div class="form-group">
-          <label>ชื่อเล่น <span class="required">*</span></label>
-          <input 
-            v-model="formData.nickname" 
-            type="text" 
-            placeholder="กรอกชื่อเล่น"
-            required
-          >
-        </div>
+                <!-- ชื่อเล่น -->
+                <div class="mb-3 fs-5 p-2">
+                  <label class="form-label fw-semibold">
+                    ชื่อเล่น 
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input 
+                    v-model="formData.nickname" 
+                    type="text" 
+                    class="form-control form-control-lg fs-6"
+                    placeholder="กรอกชื่อเล่น"
+                    required
+                  >
+                </div>
 
-        <!-- อายุ -->
-        <div class="form-group">
-          <label>อายุ <span class="required">*</span></label>
-          <input 
-            v-model.number="formData.age" 
-            type="number" 
-            placeholder="กรอกอายุ"
-            min="1"
-            max="100"
-            required
-          >
-        </div>
+                <!-- อายุ -->
+                <div class="mb-3 fs-5 p-2">
+                  <label class="form-label fw-semibold">
+                    อายุ 
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input 
+                    v-model.number="formData.age" 
+                    type="number" 
+                    class="form-control form-control-lg fs-6"
+                    placeholder="กรอกอายุ"
+                    min="1"
+                    max="100"
+                    required
+                  >
+                </div>
 
-        <!-- รุ่นที่แข่ง -->
-        <div class="form-group">
-          <label>รุ่นที่จะแข่ง <span class="required">*</span></label>
-          <div class="radio-group">
-            <label class="radio-label">
-              <input 
-                v-model="formData.ageGroup" 
-                type="radio" 
-                value="น้อยกว่า 18 ปี"
-                required
+                <!-- รุ่นที่แข่ง -->
+                <div class="row">
+                <div class="mb-3 fs-5 ">
+                  <label class="form-label fw-semibold">
+                    รุ่นที่ต้องการแข่ง 
+                    <span class="text-danger">*</span>
+                  </label>
+                  <div class="bg-light text-dark p-3 rounded fs-6">
+                    <div class="form-check mb-2">
+                      <input 
+                        v-model="formData.ageGroup" 
+                        type="radio" 
+                        class="form-check-input"
+                        id="under18"
+                        value="น้อยกว่า 18 ปี"
+                        required
+                      >
+                      <label class="form-check-label" for="under18">
+                        น้อยกว่า 18 ปี
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input 
+                        v-model="formData.ageGroup" 
+                        type="radio" 
+                        class="form-check-input"
+                        id="over18"
+                        value="มากกว่า 18 ปี"
+                        required
+                      >
+                      <label class="form-check-label " for="over18">
+                        มากกว่า 18 ปี
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <!-- สถานที่ -->
+                <div class="mb-4">
+                  <label class="form-label fw-semibold">
+                    สถานที่ 
+                    <span class="text-danger">*</span>
+                  </label>
+                  <p class="text-muted small mb-2">เลือกสนามในจังหวัดที่ท่านต้องการแข่งขัน</p>
+                  <select 
+                    v-model="formData.location" 
+                    class="form-select form-select-lg fs-6 fw-bold"
+                    required
+                  >
+                    <option value="" disabled>-- เลือกสถานที่ --</option>
+                    <option value="อุบลราชธานี">📍 เซ็นทรัลอุบลราชธานี</option>
+                    <option value="อำนาจเจริญ">📍 อำนาจเจริญ</option>
+                    <option value="นครราชสีมา">📍 เซ็นทรัลนครราชสีมา</option>
+                  </select>
+                </div>
+
+                <!-- ปุ่มส่งฟอร์ม -->
+                <div class="d-grid">
+                  <button 
+                    type="submit" 
+                    class="btn btn-success btn-lg py-3"
+                    :disabled="isSubmitting"
+                  >
+                    <span v-if="isSubmitting">
+                      <span class="spinner-border spinner-border-sm me-2"></span>
+                      กำลังส่ง...
+                    </span>
+                    <span v-else class="fw-bold">
+                      Submit
+                    </span>
+                  </button>
+                </div>
+              </form>
+
+              <!-- ข้อความแจ้งเตือนสำเร็จ -->
+              <div 
+                v-if="successMessage" 
+                class="alert alert-success alert-dismissible fade show mt-4 mb-0"
+                role="alert"
               >
-              <span>น้อยกว่า 18 ปี</span>
-            </label>
-            <label class="radio-label">
-              <input 
-                v-model="formData.ageGroup" 
-                type="radio" 
-                value="มากกว่า 18 ปี"
-                required
+                <div class="d-flex align-items-center">
+                  <div class="fs-4 me-2">✅</div>
+                  <div class="flex-grow-1">
+                    <strong>สำเร็จ!</strong> {{ successMessage }}
+                  </div>
+                </div>
+                <button 
+                  type="button" 
+                  class="btn-close" 
+                  @click="successMessage = ''"
+                ></button>
+              </div>
+
+              <!-- ข้อความแจ้งเตือนผิดพลาด -->
+              <div 
+                v-if="errorMessage" 
+                class="alert alert-danger alert-dismissible fade show mt-4 mb-0"
+                role="alert"
               >
-              <span>มากกว่า 18 ปี</span>
-            </label>
+                <div class="d-flex align-items-center">
+                  <div class="fs-4 me-2">❌</div>
+                  <div class="flex-grow-1">
+                    <strong>เกิดข้อผิดพลาด!</strong> {{ errorMessage }}
+                  </div>
+                </div>
+                <button 
+                  type="button" 
+                  class="btn-close" 
+                  @click="errorMessage = ''"
+                ></button>
+              </div>
+            </div>
+
+            <!-- Footer การ์ด -->
+            <div class="card-footer bg-light text-center text-muted py-3">
+              <small>กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง</small>
+            </div>
           </div>
+
         </div>
-
-        <!-- สถานที่ -->
-        <div class="form-group">
-          <label>สถานที่(เลือกสนามในจังหวัดที่ท่านต้องการแข่งขัน) <span class="required">*</span></label>
-          <select v-model="formData.location" required>
-            <option value="" disabled>เลือกสถานที่</option>
-            <option value="อุบลราชธานี">เซ็นทรัลอุบลราชธานี</option>
-            <option value="อำนาจเจริญ">อำนาจเจริญ</option>
-            <option value="นครราชสีมา">เซ็นทรัลนครราชสีมา</option>
-          </select>
-        </div>
-
-        <!-- ปุ่มส่งฟอร์ม -->
-        <button type="submit" class="submit-btn" :disabled="isSubmitting">
-          {{ isSubmitting ? 'กำลังส่ง...' : 'ส่งฟอร์ม' }}
-        </button>
-      </form>
-
-      <!-- ข้อความแจ้งเตือน -->
-      <div v-if="successMessage" class="success-message">
-        ✅ {{ successMessage }}
-      </div>
-      <div v-if="errorMessage" class="error-message">
-        ❌ {{ errorMessage }}
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script setup>
+// โหลด Bootstrap
+useHead({
+  link: [
+    {
+      rel: 'stylesheet',
+      href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css'
+    }
+  ],
+  script: [
+    {
+      src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js'
+    }
+  ]
+})
+
 import { collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from 'firebase/firestore'
 
 const { $db } = useNuxtApp()
@@ -212,264 +322,3 @@ onMounted(() => {
   fetchRegistrants()
 })
 </script>
-
-<style scoped>
-.container {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 20px;
-}
-
-.form-card {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-bottom: 30px;
-}
-
-h1 {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 30px;
-  font-size: 28px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  color: #34495e;
-  font-weight: 500;
-}
-
-.required {
-  color: #e74c3c;
-}
-
-input[type="text"],
-input[type="number"],
-select {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: border-color 0.3s;
-}
-
-input[type="text"]:focus,
-input[type="number"]:focus,
-select:focus {
-  outline: none;
-  border-color: #3498db;
-}
-
-.radio-group {
-  display: flex;
-  gap: 20px;
-  margin-top: 10px;
-}
-
-.radio-label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 10px 15px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  transition: all 0.3s;
-}
-
-.radio-label:hover {
-  border-color: #3498db;
-  background: #f8f9fa;
-}
-
-.radio-label input[type="radio"] {
-  margin-right: 8px;
-  cursor: pointer;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 15px;
-  background: #27ae60;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
-  margin-top: 10px;
-}
-
-.submit-btn:hover:not(:disabled) {
-  background: #229954;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
-}
-
-.submit-btn:disabled {
-  background: #95a5a6;
-  cursor: not-allowed;
-}
-
-.success-message,
-.error-message {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 500;
-  animation: slideDown 0.3s ease;
-}
-
-.success-message {
-  background: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-}
-
-.error-message {
-  background: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.registrants-card {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.registrants-card h2 {
-  color: #2c3e50;
-  margin-bottom: 20px;
-  font-size: 24px;
-}
-
-.loading,
-.empty {
-  text-align: center;
-  padding: 40px;
-  color: #95a5a6;
-  font-size: 18px;
-}
-
-.registrant-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.registrant-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #3498db;
-  transition: all 0.3s;
-}
-
-.registrant-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.registrant-info {
-  flex: 1;
-}
-
-.registrant-info h3 {
-  margin: 0 0 10px 0;
-  color: #2c3e50;
-  font-size: 18px;
-}
-
-.details {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-}
-
-.badge {
-  padding: 4px 12px;
-  background: #e8f4f8;
-  color: #2980b9;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.badge.location {
-  background: #fef5e7;
-  color: #d68910;
-}
-
-.registrant-info small {
-  color: #7f8c8d;
-  font-size: 13px;
-}
-
-.delete-btn {
-  padding: 8px 16px;
-  background: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 14px;
-}
-
-.delete-btn:hover {
-  background: #c0392b;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .container {
-    padding: 10px;
-  }
-
-  .form-card,
-  .registrants-card {
-    padding: 20px;
-  }
-
-  .radio-group {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .registrant-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
-  .delete-btn {
-    align-self: flex-end;
-  }
-}
-</style>
